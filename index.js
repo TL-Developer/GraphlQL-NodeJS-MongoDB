@@ -4,16 +4,21 @@ const {
 } = require('apollo-server');
 
 const typeDefs = gql`
+  scalar Date
+
   type Query {
     ola: String!,
-    horaAtual: String!,
+    horaAtual: Date!,
   }
 `;
 
 const resolvers = {
   Query: {
+    ola() {
+      return `olá`;
+    },
     horaAtual() {
-      return `${new Date()}`;
+      return new Date;
     }
   }
 };
