@@ -6,6 +6,13 @@ const {
 const typeDefs = gql`
   scalar Date
 
+  type Produto {
+    nome: String!,
+    preco: Float!,
+    desconto: Float,
+    precoComDesconto: Float!,
+  }
+
   type Usuario {
     id: ID,
     nome: String!,
@@ -19,6 +26,7 @@ const typeDefs = gql`
     ola: String!,
     horaAtual: Date!,
     usuarioLogado: Usuario,
+    produto: Produto,
   }
 `;
 
@@ -27,6 +35,14 @@ const resolvers = {
     salario(usuario) {
       return usuario.salario_real;
     },
+  },
+  Produto: {
+    precoComDesconto(produto) {
+      if (!produto.desconto) {
+        return produto.preco;
+      }
+      return produto.preco - produto.desconto;
+    }
   },
   Query: {
     ola() {
@@ -44,6 +60,13 @@ const resolvers = {
         salario_real: 100.50,
         vip: true,
       };
+    },
+    produto() {
+      return {
+        nome: 'oakley',
+        preco: 450.50,
+        desconto: 50.50,
+      }
     }
   }
 };
