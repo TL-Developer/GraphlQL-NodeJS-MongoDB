@@ -1,7 +1,16 @@
 const {
   ApolloServer,
   gql,
-} = require('apollo-server');
+} = require('apollo-server'); 
+
+const usuarios = [
+  {
+    id: 1,
+    nome: 'tiago lima',
+    email: 'tiago.jlima@yahoo.com.br',
+    idade: 24,
+  }
+];
 
 const typeDefs = gql`
   scalar Date
@@ -10,11 +19,11 @@ const typeDefs = gql`
     nome: String!,
     preco: Float!,
     desconto: Float,
-    precoComDesconto: Float!,
+    precoComDesconto: Float,
   }
 
   type Usuario {
-    id: ID,
+    id: Int,
     nome: String!,
     email: String!,
     idade: Int,
@@ -27,6 +36,9 @@ const typeDefs = gql`
     horaAtual: Date!,
     usuarioLogado: Usuario,
     produto: Produto,
+    numerosMegaSena: [Int!]!,
+    usuarios: [Usuario]!,
+    usuario(id: Int): Usuario,
   }
 `;
 
@@ -41,7 +53,7 @@ const resolvers = {
       if (!produto.desconto) {
         return produto.preco;
       }
-      return produto.preco - produto.desconto;
+      return produto.preco * (1 - produto.desconto);
     }
   },
   Query: {
@@ -64,10 +76,21 @@ const resolvers = {
     produto() {
       return {
         nome: 'oakley',
-        preco: 450.50,
-        desconto: 50.50,
+        preco: 500.00,
+        desconto: 0.50,
       }
-    }
+    },
+    numerosMegaSena() {
+      const crescente = (a, b) => a - b;
+      return Array(6).fill(0).map(() => parseInt(Math.random() * 60 + 1)).sort(crescente);
+    },
+    usuarios() {
+      return usuarios;
+    },
+    usuario(_, args) {
+      const selecionados = usuarios.filter(usuario => usuario.id === args.id);
+      return selecionados ? selecionados[0] : null;
+    },
   }
 };
 
