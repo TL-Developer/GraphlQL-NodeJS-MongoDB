@@ -87,8 +87,8 @@ const resolvers = {
     usuarios() {
       return usuarios;
     },
-    usuario(_, args) {
-      const selecionados = usuarios.filter(usuario => usuario.id === args.id);
+    usuario(_, { id }) {
+      const selecionados = usuarios.filter(usuario => usuario.id === id);
       return selecionados ? selecionados[0] : null;
     },
   }
