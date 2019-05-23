@@ -15,11 +15,11 @@ const usuarios = [
 const perfis = [
   {
     id: 1,
-    nome: 'agressivo',
+    nome: 'comum',
   },
   {
     id: 2,
-    nome: 'moderado',
+    nome: 'administrador',
   },
 ];
 
