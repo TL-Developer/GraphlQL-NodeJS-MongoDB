@@ -12,6 +12,17 @@ const usuarios = [
   }
 ];
 
+const perfis = [
+  {
+    id: 1,
+    nome: 'comum',
+  },
+  {
+    id: 2,
+    nome: 'administrador',
+  },
+];
+
 const typeDefs = gql`
   scalar Date
 
@@ -31,6 +42,11 @@ const typeDefs = gql`
     vip: Boolean,
   }
 
+  type Perfil {
+    id: Int,
+    nome: String!,
+  }
+
   type Query {
     ola: String!,
     horaAtual: Date!,
@@ -39,6 +55,8 @@ const typeDefs = gql`
     numerosMegaSena: [Int!]!,
     usuarios: [Usuario]!,
     usuario(id: Int): Usuario,
+    perfis: [Perfil]!,
+    perfil(id: Int): Perfil,
   }
 `;
 
@@ -87,10 +105,17 @@ const resolvers = {
     usuarios() {
       return usuarios;
     },
-    usuario(_, args) {
-      const selecionados = usuarios.filter(usuario => usuario.id === args.id);
+    usuario(_, { id }) {
+      const selecionados = usuarios.filter(usuario => usuario.id === id);
       return selecionados ? selecionados[0] : null;
     },
+    perfis() {
+      return perfis;
+    },
+    perfil(_, { id }) {
+      const filtroPerfis = perfis.filter(perfil => perfil.id === id );
+      return filtroPerfis ? filtroPerfis[0] : null; 
+    }
   }
 };
 
