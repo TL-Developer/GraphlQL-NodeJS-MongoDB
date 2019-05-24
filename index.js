@@ -9,6 +9,7 @@ const usuarios = [
     nome: 'tiago lima',
     email: 'tiago.jlima@yahoo.com.br',
     idade: 24,
+    perfil_id: 1,
   }
 ];
 
@@ -33,6 +34,11 @@ const typeDefs = gql`
     precoComDesconto: Float,
   }
 
+  type Perfil {
+    id: Int,
+    nome: String!,
+  }
+
   type Usuario {
     id: Int,
     nome: String!,
@@ -40,11 +46,7 @@ const typeDefs = gql`
     idade: Int,
     salario: Float,
     vip: Boolean,
-  }
-
-  type Perfil {
-    id: Int,
-    nome: String!,
+    perfil: Perfil,
   }
 
   type Query {
@@ -65,6 +67,10 @@ const resolvers = {
     salario(usuario) {
       return usuario.salario_real;
     },
+    perfil(user) {
+      const filtroPerfis = perfis.filter(perfil => perfil.id === user.perfil_id);
+      return filtroPerfis ? filtroPerfis[0] : null; 
+    }
   },
   Produto: {
     precoComDesconto(produto) {
