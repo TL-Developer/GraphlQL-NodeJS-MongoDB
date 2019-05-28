@@ -7,6 +7,7 @@ const usuarios = [
     salario_real: 1150.00,
     vip: true,
     perfil_id: 1,
+    status: 'ATIVO'
   }
 ];
 
