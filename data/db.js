@@ -1,6 +1,11 @@
+let id = 1;
+function proximoId() {
+  return id++;
+};
+
 const usuarios = [
   {
-    id: 1,
+    id: proximoId(),
     nome: 'tiago lima',
     email: 'tiago.jlima@yahoo.com.br',
     idade: 24,
@@ -8,7 +13,7 @@ const usuarios = [
     vip: true,
     perfil_id: 1,
     status: 'ATIVO'
-  }
+  },
 ];
 
 const perfis = [
@@ -25,4 +30,5 @@ const perfis = [
 module.exports = {
   usuarios,
   perfis,
+  proximoId,
 };
