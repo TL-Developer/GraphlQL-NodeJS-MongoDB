@@ -2,6 +2,6 @@ type Mutation {
   novoUsuario(
     nome: String,
     email: String,
-    idade: int
+    idade: Int,
   ): Usuario,
 }
