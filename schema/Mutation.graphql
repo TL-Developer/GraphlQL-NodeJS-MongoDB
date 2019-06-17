@@ -12,5 +12,5 @@ type Mutation {
     nome: String,
     email: String,
     idade: Int,
-  )
+  ): String,
 }

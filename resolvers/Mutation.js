@@ -29,4 +29,7 @@ module.exports = {
     
     return excluidos ? excluidos[0] : null;
   },
+  alterarUsuario(_, { id }) {
+
+  },
 };
