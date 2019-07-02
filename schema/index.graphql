@@ -1,4 +1,5 @@
 #import Usuario, Perfil from 'Usuario.graphql';
+#import Perfil, Perfil from 'Perfil.graphql';
 #import Query from 'Query.graphql';
 #import Mutation from 'Mutation.graphql';
 
