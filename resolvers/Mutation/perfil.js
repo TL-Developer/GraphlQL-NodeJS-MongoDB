@@ -3,22 +3,6 @@ const {
   proximoId,
 } = require('../../data/db');
 
-function indiceUsuario(filtro) {
-  if(!filtro) return -1;
-  const {
-    id,
-    email,
-  } = filtro;
-
-  if(id) {
-    return usuarios.findIndex(usuario => usuario.id === id);
-  } else if(email) {
-    return usuarios.findIndex(usuario => usuario.email === email);
-  }
-
-  return -1;
-};
-
 module.exports = {
   novoPerfil(_, { dados }) {
     perfis.push({
